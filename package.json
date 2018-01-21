@@ -1,0 +1,23 @@
+{
+  "name": "calculusbuddy",
+  "version": "0.1.0",
+  "description": "Solves Calculus based equations",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FermiDirak/CalculusBuddy.git"
+  },
+  "keywords": [
+    "calculus",
+    "solver"
+  ],
+  "author": "Bryan Manuele",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FermiDirak/CalculusBuddy/issues"
+  },
+  "homepage": "https://github.com/FermiDirak/CalculusBuddy#readme"
+}
