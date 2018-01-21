@@ -4,6 +4,7 @@
   "description": "Solves Calculus based equations",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/FermiDirak/CalculusBuddy/issues"
   },
-  "homepage": "https://github.com/FermiDirak/CalculusBuddy#readme"
+  "homepage": "https://github.com/FermiDirak/CalculusBuddy#readme",
+  "devDependencies": {
+    "nodemon": "^1.14.11"
+  }
 }
