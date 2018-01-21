@@ -12,13 +12,18 @@ var EquationTree = function(datum, left, right) {
  * An enumeration of possible EquationTree operations
  */
 EquationTree.operations = {
-	multiply: 'x',
+	multiply: '*',
 	divide: '/',
 	add: '+',
 	subtract: '-',
 	sin: 'sin',
 	cos: 'cos',
 	tan: 'tan',
+}
+
+EquationTree.symbols = {
+	x: 'x',
+	y: 'y',
 }
 
 /**
@@ -46,32 +51,35 @@ EquationTree.isOperation = function(value) {
 }
 
 /**
- * Evalulates the EquationTree to a value
+ * Evaluates the EquationTree to a value
  */
 EquationTree.prototype.evaluate = function () {
+	//@TODO: make evaluate work with symbols
 	var result = 0;
 
 	switch (this.datum) {
+		case EquationTree.symbols.x:
+			break;
 		case EquationTree.operations.add:
 			result = this.left.evaluate() + this.right.evaluate();
 			break;
 		case EquationTree.operations.subtract:
-			result = this.left.evaluate() - this.right.evaluate()
+			result = this.left.evaluate() - this.right.evaluate();
 			break;
 		case EquationTree.operations.multiply:
-			result = this.left.evaluate() * this.right.evaluate()
+			result = this.left.evaluate() * this.right.evaluate();
 			break;
 		case EquationTree.operations.divide:
-			result = this.left.evaluate() / this.right.evaluate()
+			result = this.left.evaluate() / this.right.evaluate();
 			break;
 		case EquationTree.operations.cossin:
-			result = Math.cos(this.left.evaluate())
+			result = Math.cos(this.left.evaluate());
 			break;
 		case EquationTree.operations.sin:
-			result = Math.sin(this.left.evaluate())
+			result = Math.sin(this.left.evaluate());
 			break;
 		case EquationTree.operations.tan:
-			result = Math.tan(this.left.evaluate())
+			result = Math.tan(this.left.evaluate());
 			break;
 		default:
 			result = this.datum;
@@ -80,6 +88,11 @@ EquationTree.prototype.evaluate = function () {
 
 	return result;
 }
+
+/**
+ * Simplifies the EquationTree to a simpler equationTree
+ */
+
 
 /**
  * Evaluates the derivative of the Equation tree

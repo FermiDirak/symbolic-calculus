@@ -10,7 +10,7 @@ var eq = new EquationTree(
 				new EquationTree(3),
 				new EquationTree(EquationTree.operations.multiply,
 					new EquationTree(5),
-					new EquationTree(2)
+					new EquationTree(EquationTree.symbols.x)
 				)
 			),
 			new EquationTree(9)
