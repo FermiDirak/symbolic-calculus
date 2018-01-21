@@ -49,7 +49,36 @@ EquationTree.isOperation = function(value) {
  * Evalulates the EquationTree to a value
  */
 EquationTree.prototype.evaluate = function () {
+	var result = 0;
 
+	switch (this.datum) {
+		case EquationTree.operations.add:
+			result = this.left.evaluate() + this.right.evaluate();
+			break;
+		case EquationTree.operations.subtract:
+			result = this.left.evaluate() - this.right.evaluate()
+			break;
+		case EquationTree.operations.multiply:
+			result = this.left.evaluate() * this.right.evaluate()
+			break;
+		case EquationTree.operations.divide:
+			result = this.left.evaluate() / this.right.evaluate()
+			break;
+		case EquationTree.operations.cossin:
+			result = Math.cos(this.left.evaluate())
+			break;
+		case EquationTree.operations.sin:
+			result = Math.sin(this.left.evaluate())
+			break;
+		case EquationTree.operations.tan:
+			result = Math.tan(this.left.evaluate())
+			break;
+		default:
+			result = this.datum;
+			break;
+	}
+
+	return result;
 }
 
 /**
@@ -72,8 +101,6 @@ EquationTree.prototype.integrate = function() {
 EquationTree.prototype.toString = function() {
 	var string = '';
 	var isOperation = EquationTree.isOperation(this.datum);
-
-	console.log(isOperation);
 
 	if (isOperation) {
 		string += '(';

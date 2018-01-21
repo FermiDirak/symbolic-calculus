@@ -18,4 +18,6 @@ var eq = new EquationTree(
 	);
 
 console.log(eq)
-console.log(eq.toString());
+console.log('equation:', eq.toString());
+
+console.log('evalulate:', eq.evaluate());
