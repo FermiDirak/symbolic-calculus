@@ -11,7 +11,7 @@ var EquationTree = function(datum, left, right) {
 /**
  * An enumeration of possible EquationTree operations
  */
-EquationTree.prototype.operations = {
+EquationTree.operations = {
 	multiply: 'x',
 	divide: '/',
 	add: '+',
@@ -22,9 +22,35 @@ EquationTree.prototype.operations = {
 }
 
 /**
- * Evalulates the expression
+ * Parses an expression tree and turns it into an equation tree
  */
-EquationTree.prototype.evaluate =
+EquationTree.create = function(equationString) {
+	//@TODO: implement equation parsing
+
+	return new EquationTree(this.operations.multiply, 3, 4);
+}
+
+/**
+ * Checks if a value is an operation or not
+ * @param value The value to test
+ * @result Whether the param is an operation or not
+ */
+EquationTree.isOperation = function(value) {
+	for (var key in EquationTree.operations) {
+		if (value === EquationTree.operations[key]) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+/**
+ * Evalulates the EquationTree to a value
+ */
+EquationTree.prototype.evaluate = function () {
+
+}
 
 /**
  * Evaluates the derivative of the Equation tree
@@ -38,6 +64,36 @@ EquationTree.prototype.derivate = function() {
  */
 EquationTree.prototype.integrate = function() {
 
+}
+
+/**
+ * Turns the Equation to a string
+ */
+EquationTree.prototype.toString = function() {
+	var string = '';
+	var isOperation = EquationTree.isOperation(this.datum);
+
+	console.log(isOperation);
+
+	if (isOperation) {
+		string += '(';
+	}
+
+	string += this.datum;
+
+	if (this.left) {
+		string += ' ' + this.left.toString();
+	}
+
+	if (this.right) {
+		string += ' ' + this.right.toString();
+	}
+
+	if (isOperation) {
+		string += ')';
+	}
+
+	return string;
 }
 
 module.exports = EquationTree;
