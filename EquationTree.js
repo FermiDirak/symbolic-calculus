@@ -102,7 +102,7 @@ EquationTree.prototype.simplify = function() {
  * Determines if an equation can be simplified
  */
 EquationTree.prototype.simplifiable = function() {
-
+	return true;
 }
 
 /**

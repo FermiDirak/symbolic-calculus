@@ -14,7 +14,7 @@ beforeEach(function() {
 				new EquationTree(3),
 				new EquationTree(EquationTree.operations.multiply,
 					new EquationTree(5),
-					new EquationTree(3)
+					new EquationTree(EquationTree.symbols.x)
 				)
 			),
 			new EquationTree(9)
@@ -28,7 +28,7 @@ beforeEach(function() {
 				new EquationTree(3),
 				new EquationTree(EquationTree.operations.multiply,
 					new EquationTree(5),
-					new EquationTree(3)
+					new EquationTree(EquationTree.symbols.x)
 				)
 			),
 			new EquationTree(9)
@@ -42,7 +42,7 @@ beforeEach(function() {
 				new EquationTree(3),
 				new EquationTree(EquationTree.operations.multiply,
 					new EquationTree(5),
-					new EquationTree(2)
+					new EquationTree(3)
 				)
 			),
 			new EquationTree(9)
@@ -63,7 +63,13 @@ describe('EquationTree', function() {
 
 	describe('.evaluate', function() {
 		it('should evaluate a non-symbolic expression', function() {
-			assert.equal(eq1.evaluate(), 6);
+			assert.equal(eq3.evaluate(), 6);
 		})
 	});
+
+	describe('.simplifiable', function() {
+		it('should simplify a symbolic expression', function() {
+			assert.equal(eq1.simplifiable(), true);
+		});
+	})
 });
