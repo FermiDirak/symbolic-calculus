@@ -76,4 +76,15 @@ describe('EquationTree', function() {
 			assert.equal(eq1.simplifiable(), true);
 		});
 	});
+
+	describe('.forEach', function() {
+		it('should iterate over all elements in a EquationTree', function() {
+			var actual = [];
+			var expected = [ '+', 4, '/', '+', 3, '*', 5, 'x', 9 ];
+			eq1.forEach(function(x) {
+				actual.push(x);
+			});
+			assert.deepEqual(actual, expected);
+		});
+	});
 });

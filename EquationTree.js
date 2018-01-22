@@ -152,7 +152,7 @@ EquationTree.prototype.integrate = function() {
 /**
  * Applys a callback for all elements in the Equation Tree
  * @param callback Callback to apply to each element of the EquationTree
- * 		passed in a
+ * 		callback takes in datum as a parameter
  */
 EquationTree.prototype.forEach = function(callback) {
 	callback(this.datum);
