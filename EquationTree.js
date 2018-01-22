@@ -6,6 +6,8 @@ var EquationTree = function(datum, left, right) {
 	this.datum = datum;
 	this.left = left;
 	this.right = right;
+
+	this.canBeSimplified = true;
 }
 
 /**
@@ -53,7 +55,7 @@ EquationTree.isOperation = function(value) {
 /**
  * Evaluates the EquationTree to a value
  */
-EquationTree.prototype.evaluate = function () {
+EquationTree.prototype.evaluate = function (xVal) {
 	//@TODO: make evaluate work with symbols
 	var result = 0;
 
@@ -92,7 +94,16 @@ EquationTree.prototype.evaluate = function () {
 /**
  * Simplifies the EquationTree to a simpler equationTree
  */
+EquationTree.prototype.simplify = function() {
 
+}
+
+/**
+ * Determines if an equation can be simplified
+ */
+EquationTree.prototype.simplifiable = function() {
+
+}
 
 /**
  * Evaluates the derivative of the Equation tree
@@ -106,6 +117,34 @@ EquationTree.prototype.derivate = function() {
  */
 EquationTree.prototype.integrate = function() {
 
+}
+
+/**
+ * Determines if two equation trees are deeply equivalent
+ * @param other EquationTree to compare to
+ */
+EquationTree.prototype.equals = function(other) {
+	var equals = true;
+
+	if (this.datum === other.datum) {
+		//check left side
+		if (this.left && other.left) {
+			equals = this.left.equals(other.left);
+		} else if (this.left !== other.right) {
+			equals = false;
+		}
+
+		//check right side
+		if (this.right && other.right) {
+			equals = this.right.equals(other.right);
+		} else if (this.right !== other.right){
+			equals = false;
+		}
+	} else {
+		equals = false;
+	}
+
+	return equals;
 }
 
 /**
