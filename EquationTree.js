@@ -126,21 +126,15 @@ EquationTree.prototype.integrate = function() {
 EquationTree.prototype.equals = function(other) {
 	var equals = true;
 
-	if (this.datum === other.datum) {
-		//check left side
-		if (this.left && other.left) {
-			equals = this.left.equals(other.left);
-		} else if (this.left !== other.right) {
-			equals = false;
-		}
+	if (this.datum !== other.datum) {
+		equals = false;
+	}
 
-		//check right side
-		if (this.right && other.right) {
-			equals = this.right.equals(other.right);
-		} else if (this.right !== other.right){
-			equals = false;
-		}
-	} else {
+	if (this.left && other.left && !this.left.equals(other.left)) {
+		equals = false;
+	}
+
+	if (this.right && other.right && !this.right.equals(other.right)) {
 		equals = false;
 	}
 

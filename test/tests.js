@@ -7,48 +7,45 @@ var eq2;
 var eq3;
 
 beforeEach(function() {
-	eq1 = new EquationTree(
-		EquationTree.operations.add,
+	eq1 = new EquationTree(EquationTree.operations.add,
 		new EquationTree(4),
 		new EquationTree(EquationTree.operations.divide,
 			new EquationTree(EquationTree.operations.add,
 				new EquationTree(3),
 				new EquationTree(EquationTree.operations.multiply,
 					new EquationTree(5),
-					new EquationTree(EquationTree.symbols.x)
+					new EquationTree(3)
 				)
 			),
 			new EquationTree(9)
 		)
 	);
 
-	eq2 = new EquationTree(
-		EquationTree.operations.add,
+	eq2 = new EquationTree(EquationTree.operations.add,
 		new EquationTree(4),
 		new EquationTree(EquationTree.operations.divide,
 			new EquationTree(EquationTree.operations.add,
 				new EquationTree(3),
 				new EquationTree(EquationTree.operations.multiply,
 					new EquationTree(5),
-					new EquationTree(EquationTree.symbols.x)
+					new EquationTree(3)
 				)
 			),
 			new EquationTree(9)
 		)
 	);
 
-	eq3 = new EquationTree(
-		EquationTree.operations.add,
+	eq3 = new EquationTree(EquationTree.operations.add,
 		new EquationTree(4),
 		new EquationTree(EquationTree.operations.divide,
 			new EquationTree(EquationTree.operations.add,
 				new EquationTree(3),
 				new EquationTree(EquationTree.operations.multiply,
 					new EquationTree(5),
-					new EquationTree(EquationTree.symbols.x)
+					new EquationTree(2)
 				)
 			),
-			new EquationTree(7)
+			new EquationTree(9)
 		)
 	);
 });
@@ -60,7 +57,13 @@ describe('EquationTree', function() {
 		});
 
 		it('should be false when two trees are not deeply equal', function() {
-			assert.equal(eq1.equals(eq3), false);
+			assert.equal(eq2.equals(eq3), false);
 		});
-	})
+	});
+
+	describe('.evaluate', function() {
+		it('should evaluate a non-symbolic expression', function() {
+			assert.equal(eq1.evaluate(), 6);
+		})
+	});
 });
