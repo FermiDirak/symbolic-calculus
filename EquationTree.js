@@ -102,6 +102,36 @@ EquationTree.prototype.simplify = function() {
  * Determines if an equation can be simplified
  */
 EquationTree.prototype.simplifiable = function() {
+	var isSimplifiable = true;
+	var hasSymbol = false;
+
+	var additionCounter = 0;
+	var multiplyCounter = 0;
+
+	if (!this.datum) {
+		return;
+	}
+
+	if (this.datum === EquationTree.operations.add
+	|| this.datum === EquationTree.operations.subtract) {
+
+		additionCounter++;
+
+	} else if (this.datum === EquationTree.operations.multiply
+	|| this.datum === EquationTree.operations.divide) {
+
+		multiplyCounter++;
+
+	}
+
+	if (this.left) {
+		this.left.simplifiable();
+	}
+
+	if (this.right) {
+		this.right.simplifiable();
+	}
+
 	return true;
 }
 
@@ -117,6 +147,23 @@ EquationTree.prototype.derivate = function() {
  */
 EquationTree.prototype.integrate = function() {
 
+}
+
+/**
+ * Applys a callback for all elements in the Equation Tree
+ * @param callback Callback to apply to each element of the EquationTree
+ * 		passed in a
+ */
+EquationTree.prototype.forEach = function(callback) {
+	callback(this.datum);
+
+	if (this.left) {
+		this.left.forEach(callback);
+	}
+
+	if (this.right) {
+		this.right.forEach(callback);
+	}
 }
 
 /**

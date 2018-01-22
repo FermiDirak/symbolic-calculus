@@ -68,8 +68,12 @@ describe('EquationTree', function() {
 	});
 
 	describe('.simplifiable', function() {
+		it('should identify a simplifiable expression as simplifiable', function() {
+			assert.equal(eq1.simplifiable(), true);
+		});
+
 		it('should simplify a symbolic expression', function() {
 			assert.equal(eq1.simplifiable(), true);
 		});
-	})
+	});
 });
