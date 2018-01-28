@@ -5,6 +5,7 @@ var EquationTree = require('./../EquationTree');
 var eq1;
 var eq2;
 var eq3;
+var eq4;
 
 beforeEach(function() {
 	eq1 = new EquationTree(EquationTree.operations.add,
@@ -48,6 +49,11 @@ beforeEach(function() {
 			new EquationTree(9)
 		)
 	);
+
+	eq4 = new EquationTree(EquationTree.operations.add,
+		new EquationTree(4),
+		new EquationTree(3)
+	);
 });
 
 describe('EquationTree', function() {
@@ -72,8 +78,12 @@ describe('EquationTree', function() {
 			assert.equal(eq1.simplifiable(), true);
 		});
 
-		it('should simplify a symbolic expression', function() {
-			assert.equal(eq1.simplifiable(), true);
+		it('should identify a long non-symbolic expression as simplifiable', function() {
+			assert.equal(eq3.simplifiable(), true);
+		});
+
+		it('should identify a short non-symbolic expression as simplifiable', function() {
+			assert.equal(eq3.simplifiable(), true);
 		});
 	});
 
@@ -87,4 +97,5 @@ describe('EquationTree', function() {
 			assert.deepEqual(actual, expected);
 		});
 	});
+
 });
