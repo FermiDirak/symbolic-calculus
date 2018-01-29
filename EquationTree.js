@@ -18,6 +18,7 @@ EquationTree.operations = {
 	divide: '/',
 	add: '+',
 	subtract: '-',
+	exponential: '^',
 	sin: 'sin',
 	cos: 'cos',
 	tan: 'tan',
@@ -211,10 +212,6 @@ EquationTree.prototype.equals = function(other) {
 	if (this.datum !== other.datum) {
 		equals = false;
 	}
-
-	console.log(this.datum, other.datum);
-	console.log(typeof this.datum, typeof other.datum);
-	console.log(equals);
 
 	if (this.left && other.left && !this.left.equals(other.left)) {
 		equals = false;
