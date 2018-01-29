@@ -5,62 +5,32 @@ var EquationTree = require('./../EquationTree');
 var eq1;
 var eq2;
 var eq3;
-var eq4;
 
 beforeEach(function() {
-	eq1 = new EquationTree(EquationTree.operations.add,
-		new EquationTree(4),
-		new EquationTree(EquationTree.operations.divide,
-			new EquationTree(EquationTree.operations.add,
-				new EquationTree(3),
-				new EquationTree(EquationTree.operations.multiply,
-					new EquationTree(5),
-					new EquationTree(EquationTree.symbols.x)
-				)
-			),
-			new EquationTree(9)
-		)
-	);
-
-	eq2 = new EquationTree(EquationTree.operations.add,
-		new EquationTree(4),
-		new EquationTree(EquationTree.operations.divide,
-			new EquationTree(EquationTree.operations.add,
-				new EquationTree(3),
-				new EquationTree(EquationTree.operations.multiply,
-					new EquationTree(5),
-					new EquationTree(EquationTree.symbols.x)
-				)
-			),
-			new EquationTree(9)
-		)
-	);
-
-	eq3 = new EquationTree(EquationTree.operations.add,
-		new EquationTree(4),
-		new EquationTree(EquationTree.operations.divide,
-			new EquationTree(EquationTree.operations.add,
-				new EquationTree(3),
-				new EquationTree(EquationTree.operations.multiply,
-					new EquationTree(5),
-					new EquationTree(3)
-				)
-			),
-			new EquationTree(9)
-		)
-	);
-
-	eq4 = new EquationTree(EquationTree.operations.add,
-		new EquationTree(4),
-		new EquationTree(3)
-	);
+	eq1 = EquationTree.create('(+ 4 (/ (+ 3 (* 5 x)) 9))');
+	eq2 = EquationTree.create('(+ 4 (/ (+ 3 (* 5 x)) 9))');
+	eq3 = EquationTree.create('(+ 4 (/ (+ 3 (* 5 3)) 9))');
 });
 
 describe('EquationTree', function() {
 	describe('.create', function() {
 		it('should create a tree from an expression', function() {
-			var compareTree = EquationTree.create('(+ 4 (/ (+ 3 (* 5 x)) 9))');
-			assert.equal(compareTree.equals(eq1), true)
+			//creating a tree by hand
+			var comparisonTree = new EquationTree(EquationTree.operations.add,
+				new EquationTree(4),
+				new EquationTree(EquationTree.operations.divide,
+					new EquationTree(EquationTree.operations.add,
+						new EquationTree(3),
+						new EquationTree(EquationTree.operations.multiply,
+							new EquationTree(5),
+							new EquationTree(EquationTree.symbols.x)
+						)
+					),
+					new EquationTree(9)
+				)
+			);
+
+			assert.equal(comparisonTree.equals(eq1), true)
 		})
 	});
 
