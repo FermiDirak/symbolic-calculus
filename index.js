@@ -47,5 +47,9 @@ var eq3 = new EquationTree(
 		)
 	);
 
-var eq4 = EquationTree.create('(+ 4 (/ (+ 3 (* 5 x)) 9))');
-console.log(eq4.toString())
+var eq4 = EquationTree.create('(+ 4 (/ (+ 3 (* 5 (cos 3.14 0))) 9))');
+
+console.log(JSON.stringify(eq4));
+console.log(eq4.toString());
+
+console.log(eq4.evaluate());

@@ -6,8 +6,6 @@ var EquationTree = function(datum, left, right) {
 	this.datum = datum;
 	this.left = left;
 	this.right = right;
-
-	this.canBeSimplified = true;
 }
 
 /**
@@ -47,8 +45,9 @@ EquationTree.create = function(equationString) {
 
 		if (EquationTree.isOperation(equationArray[0])) {
 			equationTree.left = createTree();
+
 		} else {
-			if (!isNaN(equationArray[0])) {
+			if (!isNaN(equationArray[0])) { //checks to see if its a number
 				equationArray[0] = parseFloat(equationArray[0]);
 			}
 
@@ -90,6 +89,7 @@ EquationTree.isOperation = function(value) {
 
 /**
  * Evaluates the EquationTree to a value
+ * @param xVal Value to use for symbol X
  */
 EquationTree.prototype.evaluate = function (xVal) {
 	//@TODO: make evaluate work with symbols
@@ -110,7 +110,10 @@ EquationTree.prototype.evaluate = function (xVal) {
 		case EquationTree.operations.divide:
 			result = this.left.evaluate() / this.right.evaluate();
 			break;
-		case EquationTree.operations.cossin:
+		case EquationTree.operations.exponential:
+			result = Math.pow(this.left.evaluate(), this.right.evaluate());
+			break;
+		case EquationTree.operations.cos:
 			result = Math.cos(this.left.evaluate());
 			break;
 		case EquationTree.operations.sin:
@@ -119,7 +122,7 @@ EquationTree.prototype.evaluate = function (xVal) {
 		case EquationTree.operations.tan:
 			result = Math.tan(this.left.evaluate());
 			break;
-		default:
+		default: //number
 			result = this.datum;
 			break;
 	}
