@@ -92,7 +92,6 @@ EquationTree.isOperation = function(value) {
  * @param xVal Value to use for symbol X
  */
 EquationTree.prototype.evaluate = function (xVal=10, yVal=10) {
-	//@TODO: make evaluate work with symbols
 	var result = 0;
 
 	switch (this.datum) {
@@ -127,9 +126,6 @@ EquationTree.prototype.evaluate = function (xVal=10, yVal=10) {
 			break;
 		case EquationTree.symbols.y:
 			result = yVal;
-			break;
-		case EquationTree.operations.y:
-
 			break;
 		default: //number
 			result = this.datum;
