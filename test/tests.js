@@ -57,6 +57,17 @@ beforeEach(function() {
 });
 
 describe('EquationTree', function() {
+	describe('.create', function() {
+		it('should create a tree from an expression', function() {
+			var compareTree = EquationTree.create('(+ 4 (/ (+ 3 (* 5 x)) 9))');
+
+			console.log(compareTree.toString());
+			console.log(eq1.toString());
+
+			assert.equal(compareTree.equals(eq1), true)
+		})
+	});
+
 	describe('.equals', function() {
 		it('should be true when two trees are deeply equal', function() {
 			assert.equal(eq1.equals(eq2), true);

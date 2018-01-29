@@ -23,6 +23,9 @@ EquationTree.operations = {
 	tan: 'tan',
 }
 
+/**
+ * An enumeration of possible symbols
+ */
 EquationTree.symbols = {
 	x: 'x',
 	y: 'y',
@@ -30,11 +33,43 @@ EquationTree.symbols = {
 
 /**
  * Parses an expression tree and turns it into an equation tree
+ * @param equationString String to parse into an equationTree
+ *        Must follow syntax: (SYMBOL EXP1 EXP2)
+ * @return The Expression Tree reprensentation of the equation
  */
 EquationTree.create = function(equationString) {
-	//@TODO: implement equation parsing
+	var equationArray = equationString.replace(/\(|\)/g,'').split(' ');
 
-	return new EquationTree(this.operations.multiply, 3, 4);
+	var createTree = function() {
+		var equationTree = new EquationTree(equationArray[0]);
+		equationArray.shift()
+
+		if (EquationTree.isOperation(equationArray[0])) {
+			equationTree.left = createTree();
+		} else {
+			if (!isNaN(equationArray[0])) {
+				equationArray[0] = parseFloat(equationArray[0]);
+			}
+
+			equationTree.left = new EquationTree(equationArray[0]);
+			equationArray.shift();
+		}
+
+		if (EquationTree.isOperation(equationArray[0])) {
+			equationTree.right = createTree();
+		} else {
+			if (!isNaN(equationArray[0])) {
+				equationArray[0] = parseFloat(equationArray[0]);
+			}
+
+			equationTree.right = new EquationTree(equationArray[0]);
+			equationArray.shift();
+		}
+
+		return equationTree;
+	}
+
+	return createTree(equationArray);
 }
 
 /**
@@ -176,6 +211,10 @@ EquationTree.prototype.equals = function(other) {
 	if (this.datum !== other.datum) {
 		equals = false;
 	}
+
+	console.log(this.datum, other.datum);
+	console.log(typeof this.datum, typeof other.datum);
+	console.log(equals);
 
 	if (this.left && other.left && !this.left.equals(other.left)) {
 		equals = false;

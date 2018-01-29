@@ -47,9 +47,5 @@ var eq3 = new EquationTree(
 		)
 	);
 
-
-console.log('should be true :', eq.equals(eq2));
-console.log('should be false:', eq.equals(eq3));
-
-// console.log('equation:', eq.toString());
-// console.log('evalulate:', eq.evaluate());
+var eq4 = EquationTree.create('(+ 4 (/ (+ 3 (* 5 x)) 9))');
+console.log(eq4.toString())
