@@ -1,2 +1,2 @@
-# CalculusBuddy
-A calculus equations solver
+# Symbolic-Calculus
+A symbolic calculus equation solver

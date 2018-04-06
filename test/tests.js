@@ -1,6 +1,6 @@
 var assert = require('assert');
 
-var EquationTree = require('./../EquationTree');
+var EquationTree = require('./../src/EquationTree');
 
 var eq1;
 var eq2;
@@ -11,6 +11,7 @@ beforeEach(function() {
 	eq2 = EquationTree.create('(+ 4 (/ (+ 3 (* 5 x)) 9))');
 	eq3 = EquationTree.create('(+ 4 (/ (+ 3 (* 5 3)) 9))');
 });
+
 
 describe('EquationTree', function() {
 	describe('.create', function() {
@@ -23,16 +24,17 @@ describe('EquationTree', function() {
 						new EquationTree(3),
 						new EquationTree(EquationTree.operations.multiply,
 							new EquationTree(5),
-							new EquationTree(EquationTree.symbols.x)
-						)
+							new EquationTree(EquationTree.symbols.x),
+						),
 					),
-					new EquationTree(9)
-				)
+					new EquationTree(9),
+				),
 			);
 
 			assert.equal(comparisonTree.equals(eq1), true)
-		})
+		});
 	});
+
 
 	describe('.equals', function() {
 		it('should be true when two trees are deeply equal', function() {
@@ -44,11 +46,13 @@ describe('EquationTree', function() {
 		});
 	});
 
+
 	describe('.evaluate', function() {
 		it('should evaluate a non-symbolic expression', function() {
 			assert.equal(eq3.evaluate(), 6);
 		})
 	});
+
 
 	describe('.simplifiable', function() {
 		it('should identify a simplifiable expression as simplifiable', function() {
@@ -63,6 +67,7 @@ describe('EquationTree', function() {
 			assert.equal(eq3.simplifiable(), true);
 		});
 	});
+
 
 	describe('.forEach', function() {
 		it('should iterate over all elements in a EquationTree', function() {

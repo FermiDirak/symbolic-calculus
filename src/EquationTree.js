@@ -3,31 +3,31 @@
  * and child nodes that are either values or equation trees
  */
 var EquationTree = function(datum, left, right) {
-	this.datum = datum;
-	this.left = left;
-	this.right = right;
+  this.datum = datum;
+  this.left = left;
+  this.right = right;
 }
 
 /**
  * An enumeration of possible EquationTree operations
  */
 EquationTree.operations = {
-	multiply: '*',
-	divide: '/',
-	add: '+',
-	subtract: '-',
-	exponential: '^',
-	sin: 'sin',
-	cos: 'cos',
-	tan: 'tan',
+  multiply: '*',
+  divide: '/',
+  add: '+',
+  subtract: '-',
+  exponential: '^',
+  sin: 'sin',
+  cos: 'cos',
+  tan: 'tan',
 }
 
 /**
  * An enumeration of possible symbols
  */
 EquationTree.symbols = {
-	x: 'x',
-	y: 'y',
+  x: 'x',
+  y: 'y',
 }
 
 /**
@@ -39,37 +39,37 @@ EquationTree.symbols = {
 EquationTree.create = function(equationString) {
 	var equationArray = equationString.replace(/\(|\)/g,'').split(' ');
 
-	var createTree = function() {
-		var equationTree = new EquationTree(equationArray[0]);
-		equationArray.shift()
+  var createTree = function() {
+    var equationTree = new EquationTree(equationArray[0]);
+    equationArray.shift()
 
-		if (EquationTree.isOperation(equationArray[0])) {
-			equationTree.left = createTree();
+    if (EquationTree.isOperation(equationArray[0])) {
+      equationTree.left = createTree();
 
-		} else {
-			if (!isNaN(equationArray[0])) { //checks to see if its a number
-				equationArray[0] = parseFloat(equationArray[0]);
-			}
+    } else {
+      if (!isNaN(equationArray[0])) { //checks to see if its a number
+        equationArray[0] = parseFloat(equationArray[0]);
+      }
 
-			equationTree.left = new EquationTree(equationArray[0]);
-			equationArray.shift();
-		}
+      equationTree.left = new EquationTree(equationArray[0]);
+      equationArray.shift();
+    }
 
-		if (EquationTree.isOperation(equationArray[0])) {
-			equationTree.right = createTree();
-		} else {
-			if (!isNaN(equationArray[0])) {
-				equationArray[0] = parseFloat(equationArray[0]);
-			}
+    if (EquationTree.isOperation(equationArray[0])) {
+      equationTree.right = createTree();
+    } else {
+      if (!isNaN(equationArray[0])) {
+        equationArray[0] = parseFloat(equationArray[0]);
+      }
 
-			equationTree.right = new EquationTree(equationArray[0]);
-			equationArray.shift();
-		}
+      equationTree.right = new EquationTree(equationArray[0]);
+      equationArray.shift();
+    }
 
-		return equationTree;
-	}
+    return equationTree;
+  }
 
-	return createTree(equationArray);
+  return createTree(equationArray);
 }
 
 /**
@@ -78,61 +78,62 @@ EquationTree.create = function(equationString) {
  * @result Whether the param is an operation or not
  */
 EquationTree.isOperation = function(value) {
-	for (var key in EquationTree.operations) {
-		if (value === EquationTree.operations[key]) {
-			return true;
-		}
-	}
+  for (var key in EquationTree.operations) {
+    if (value === EquationTree.operations[key]) {
+      return true;
+    }
+  }
 
-	return false;
+  return false;
 }
 
 /**
  * Evaluates the EquationTree to a value
  * @param xVal Value to use for symbol X
+ * @param yVal Value to use for symbol Y
  */
 EquationTree.prototype.evaluate = function (xVal=10, yVal=10) {
-	var result = 0;
+  var result = 0;
 
-	switch (this.datum) {
-		case EquationTree.symbols.x:
-			break;
-		case EquationTree.operations.add:
-			result = this.left.evaluate() + this.right.evaluate();
-			break;
-		case EquationTree.operations.subtract:
-			result = this.left.evaluate() - this.right.evaluate();
-			break;
-		case EquationTree.operations.multiply:
-			result = this.left.evaluate() * this.right.evaluate();
-			break;
-		case EquationTree.operations.divide:
-			result = this.left.evaluate() / this.right.evaluate();
-			break;
-		case EquationTree.operations.exponential:
-			result = Math.pow(this.left.evaluate(), this.right.evaluate());
-			break;
-		case EquationTree.operations.cos:
-			result = Math.cos(this.left.evaluate());
-			break;
-		case EquationTree.operations.sin:
-			result = Math.sin(this.left.evaluate());
-			break;
-		case EquationTree.operations.tan:
-			result = Math.tan(this.left.evaluate());
-			break;
-		case EquationTree.symbols.x:
-			result = xVal;
-			break;
-		case EquationTree.symbols.y:
-			result = yVal;
-			break;
-		default: //number
-			result = this.datum;
-			break;
-	}
+  switch (this.datum) {
+    case EquationTree.symbols.x:
+      break;
+    case EquationTree.operations.add:
+      result = this.left.evaluate() + this.right.evaluate();
+      break;
+    case EquationTree.operations.subtract:
+      result = this.left.evaluate() - this.right.evaluate();
+      break;
+    case EquationTree.operations.multiply:
+      result = this.left.evaluate() * this.right.evaluate();
+      break;
+    case EquationTree.operations.divide:
+      result = this.left.evaluate() / this.right.evaluate();
+      break;
+    case EquationTree.operations.exponential:
+      result = Math.pow(this.left.evaluate(), this.right.evaluate());
+      break;
+    case EquationTree.operations.cos:
+      result = Math.cos(this.left.evaluate());
+      break;
+    case EquationTree.operations.sin:
+      result = Math.sin(this.left.evaluate());
+      break;
+    case EquationTree.operations.tan:
+      result = Math.tan(this.left.evaluate());
+      break;
+    case EquationTree.symbols.x:
+      result = xVal;
+      break;
+    case EquationTree.symbols.y:
+      result = yVal;
+      break;
+    default: //number
+      result = this.datum;
+      break;
+  }
 
-	return result;
+  return result;
 }
 
 /**
@@ -146,37 +147,37 @@ EquationTree.prototype.simplify = function() {
  * Determines if an equation can be simplified
  */
 EquationTree.prototype.simplifiable = function() {
-	var isSimplifiable = true;
-	var hasSymbol = false;
+  var isSimplifiable = true;
+  var hasSymbol = false;
 
-	var additionCounter = 0;
-	var multiplyCounter = 0;
+  var additionCounter = 0;
+  var multiplyCounter = 0;
 
-	if (!this.datum) {
-		return;
-	}
+  if (!this.datum) {
+    return;
+  }
 
-	if (this.datum === EquationTree.operations.add
-	|| this.datum === EquationTree.operations.subtract) {
+  if (this.datum === EquationTree.operations.add
+  || this.datum === EquationTree.operations.subtract) {
 
-		additionCounter++;
+    additionCounter++;
 
-	} else if (this.datum === EquationTree.operations.multiply
-	|| this.datum === EquationTree.operations.divide) {
+  } else if (this.datum === EquationTree.operations.multiply
+  || this.datum === EquationTree.operations.divide) {
 
-		multiplyCounter++;
+    multiplyCounter++;
 
-	}
+  }
 
-	if (this.left) {
-		this.left.simplifiable();
-	}
+  if (this.left) {
+    this.left.simplifiable();
+  }
 
-	if (this.right) {
-		this.right.simplifiable();
-	}
+  if (this.right) {
+    this.right.simplifiable();
+  }
 
-	return true;
+  return true;
 }
 
 /**
@@ -196,18 +197,18 @@ EquationTree.prototype.integrate = function() {
 /**
  * Applys a callback for all elements in the Equation Tree
  * @param callback Callback to apply to each element of the EquationTree
- * 		callback takes in datum as a parameter
+ *     callback takes in datum as a parameter
  */
 EquationTree.prototype.forEach = function(callback) {
-	callback(this.datum);
+  callback(this.datum);
 
-	if (this.left) {
-		this.left.forEach(callback);
-	}
+  if (this.left) {
+    this.left.forEach(callback);
+  }
 
-	if (this.right) {
-		this.right.forEach(callback);
-	}
+  if (this.right) {
+    this.right.forEach(callback);
+  }
 }
 
 /**
@@ -215,49 +216,49 @@ EquationTree.prototype.forEach = function(callback) {
  * @param other EquationTree to compare to
  */
 EquationTree.prototype.equals = function(other) {
-	var equals = true;
+  var equals = true;
 
-	if (this.datum !== other.datum) {
-		equals = false;
-	}
+  if (this.datum !== other.datum) {
+    equals = false;
+  }
 
-	if (this.left && other.left && !this.left.equals(other.left)) {
-		equals = false;
-	}
+  if (this.left && other.left && !this.left.equals(other.left)) {
+    equals = false;
+  }
 
-	if (this.right && other.right && !this.right.equals(other.right)) {
-		equals = false;
-	}
+  if (this.right && other.right && !this.right.equals(other.right)) {
+    equals = false;
+  }
 
-	return equals;
+  return equals;
 }
 
 /**
  * Turns the Equation to a string
  */
 EquationTree.prototype.toString = function() {
-	var string = '';
-	var isOperation = EquationTree.isOperation(this.datum);
+  var string = '';
+  var isOperation = EquationTree.isOperation(this.datum);
 
-	if (isOperation) {
-		string += '(';
-	}
+  if (isOperation) {
+    string += '(';
+  }
 
-	string += this.datum;
+  string += this.datum;
 
-	if (this.left) {
-		string += ' ' + this.left.toString();
-	}
+  if (this.left) {
+    string += ' ' + this.left.toString();
+  }
 
-	if (this.right) {
-		string += ' ' + this.right.toString();
-	}
+  if (this.right) {
+    string += ' ' + this.right.toString();
+  }
 
-	if (isOperation) {
-		string += ')';
-	}
+  if (isOperation) {
+    string += ')';
+  }
 
-	return string;
+  return string;
 }
 
 module.exports = EquationTree;
