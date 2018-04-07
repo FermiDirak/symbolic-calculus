@@ -1,4 +1,4 @@
-var EquationTree = require('./src/EquationTree.js');
+var EquationTree = require('./EquationTree.js');
 
 // var i = 0;
 

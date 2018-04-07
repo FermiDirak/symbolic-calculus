@@ -1,6 +1,6 @@
 var assert = require('assert');
 
-var EquationTree = require('./../src/EquationTree');
+var EquationTree = require('./../EquationTree');
 
 var eq1;
 var eq2;

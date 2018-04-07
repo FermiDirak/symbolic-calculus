@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FermiDirak/CalculusBuddy.git"
+    "url": "git+https://github.com/FermiDirak/symbolic-calculus.git"
   },
   "keywords": [
     "calculus",
@@ -18,9 +18,9 @@
   "author": "Bryan Manuele",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/FermiDirak/CalculusBuddy/issues"
+    "url": "https://github.com/FermiDirak/symbolic-calculus/issues"
   },
-  "homepage": "https://github.com/FermiDirak/CalculusBuddy#readme",
+  "homepage": "https://github.com/FermiDirak/symbolic-calculus#readme",
   "devDependencies": {
     "mocha": "^5.0.0",
     "nodemon": "^1.14.11",

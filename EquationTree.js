@@ -31,7 +31,7 @@ EquationTree.symbols = {
 }
 
 /**
- * Parses an expression tree and turns it into an equation tree
+ * Parses an expression string and turns it into an equation tree
  * @param equationString String to parse into an equationTree
  *        Must follow syntax: (SYMBOL EXP1 EXP2)
  * @return The Expression Tree reprensentation of the equation
