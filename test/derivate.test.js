@@ -46,6 +46,8 @@ describe('derivate', () => {
     equation.derivate();
     const result = SymbolicCalculus.createEquation('* 3 (^ x 2)');
 
+    console.log(equation.toString());
+
     expect(equation.equals(result)).toBe(true);
   });
 

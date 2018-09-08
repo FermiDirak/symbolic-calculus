@@ -134,7 +134,7 @@ class EquationTree {
   }
 
   /** Clones the Equation Tree */
-  clone(): EquationTree | null {
+  clone(): EquationTree {
     const equationString = this.toString();
 
     return createEquation(equationString);
@@ -232,6 +232,7 @@ class EquationTree {
      * d/dx(u +/- v) => d/dx(u) +/- d/dx(v)
      * d/dx(u * v) => u * d/dx(v) + v * d/dx(u)
      * d/dx(u / v) = (v * d/dx(u) - u * d/dx(v)) / v^2
+     * d/dx(u^c) = c * u^(c-1) * d/dx(u)
      */
 
     // d/dx(c) => 0
@@ -330,6 +331,34 @@ class EquationTree {
         new EquationTree(2),
       );
 
+    // d/dx(u^c) = c * u^(c-1) * d/dx(u)
+    } else if (this.datum === EquationTree.operations.exponential
+      && this.left && this.right && typeof(this.right.datum) === 'number'
+    ) {
+
+      let left = this.left.clone();
+      let right = this.right.clone();
+
+      let dLeft = this.left.clone();
+      dLeft.derivate();
+
+      let dRight = this.right.clone();
+
+      if (typeof(dRight.datum) === 'number') {
+        dRight.datum -= 1;
+      }
+
+      this.datum = EquationTree.operations.multiply;
+      this.left = right;
+      this.right = new EquationTree(
+        EquationTree.operations.multiply,
+        new EquationTree(
+          EquationTree.operations.exponential,
+          left,
+          dRight,
+        ),
+        dLeft,
+      );
 
     }
 
