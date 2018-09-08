@@ -96,6 +96,40 @@ class EquationTree {
     return this.toString() === other.toString();
   }
 
+  /** evalutes the equation tree to a singular value */
+  evaluate(xVal=10, yVal=10): number {
+    if (this.isLeaf()) {
+      if (this.datum === EquationTree.variables['x']) {
+        return xVal;
+      } else if (this.datum === EquationTree.variables['y']) {
+        return yVal;
+      }
+
+      return Number(this.datum);
+    }
+
+    const left = this.left || new EquationTree(0);
+    const right = this.right || new EquationTree(0);
+
+    switch (this.datum) {
+      case EquationTree.operations.multiply:
+        return left.evaluate() * right.evaluate();
+      case EquationTree.operations.divide:
+        return left.evaluate() / right.evaluate();
+      case EquationTree.operations.add:
+        return left.evaluate() + right.evaluate();
+      case EquationTree.operations.subtract:
+        return left.evaluate() - right.evaluate();
+      case EquationTree.operations.exponential:
+        return Math.pow(left.evaluate(), right.evaluate());
+      case EquationTree.operations.sin:
+        return Math.sin(left.evaluate());
+      case EquationTree.operations.cos:
+        return Math.cos(left.evaluate());
+      default: // EquationTree.operations.tan:
+        return Math.tan(left.evaluate());
+    }
+  }
 }
 
 export default EquationTree;
