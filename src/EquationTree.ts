@@ -156,6 +156,7 @@ class EquationTree {
       this.datum = this.left.datum / this.right.datum;
       this.left = null;
       this.right = null;
+
     } else if (this.datum === EquationTree.operations.add
       && this.left && typeof(this.left.datum) === 'number'
       && this.right && typeof(this.right.datum) === 'number'
@@ -163,6 +164,7 @@ class EquationTree {
       this.datum = this.left.datum + this.right.datum;
       this.left = null;
       this.right = null;
+
     } else if (this.datum === EquationTree.operations.subtract
       && this.left && typeof(this.left.datum) === 'number'
       && this.right && typeof(this.right.datum) === 'number'
@@ -170,6 +172,7 @@ class EquationTree {
       this.datum = this.left.datum - this.right.datum;
       this.left = null;
       this.right = null;
+
     } else if (this.datum === EquationTree.operations.exponential
       && this.left && typeof(this.left.datum) === 'number'
       && this.right && typeof(this.right.datum) === 'number'
@@ -177,24 +180,28 @@ class EquationTree {
       this.datum = Math.pow(this.left.datum, this.right.datum);
       this.left = null;
       this.right = null;
+
     } else if (this.datum === EquationTree.operations.sin
       && this.left && typeof(this.left.datum) === 'number'
     ) {
       this.datum = Math.sin(this.left.datum);
       this.left = null;
       this.right = null;
+
     } else if (this.datum === EquationTree.operations.cos
       && this.left && typeof(this.left.datum) === 'number'
     ) {
       this.datum = Math.cos(this.left.datum);
       this.left = null;
       this.right = null;
+
     } else if (this.datum === EquationTree.operations.tan
       && this.left && typeof(this.left.datum) === 'number'
     ) {
       this.datum = Math.tan(this.left.datum);
       this.left = null;
       this.right = null;
+
     }
   }
 }
