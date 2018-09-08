@@ -231,6 +231,7 @@ class EquationTree {
      * d/dx(y) => 0
      * d/dx(u +/- v) => d/dx(u) +/- d/dx(v)
      * d/dx(u * v) => u * d/dx(v) + v * d/dx(u)
+     * d/dx(u / v) = (v * d/dx(u) - u * d/dx(v)) / v^2
      */
 
     // d/dx(c) => 0
@@ -282,12 +283,6 @@ class EquationTree {
       let dRight = this.right.clone();
       dRight.derivate();
 
-
-      console.log(left)
-      console.log(dLeft)
-      console.log(right)
-      console.log(dRight);
-
       this.datum = EquationTree.operations.add;
       this.left = new EquationTree(
         EquationTree.operations.multiply,
@@ -299,6 +294,43 @@ class EquationTree {
         dLeft,
         right,
       );
+
+    // d/dx(u / v) = (v * d/dx(u) - u * d/dx(v)) / v^2
+    } else if (this.datum === EquationTree.operations.divide
+      && this.left && this.right
+    ) {
+      let left = this.left.clone();
+      let right = this.right.clone();
+
+      let dLeft = this.left.clone();
+      dLeft.derivate();
+
+      let dRight = this.right.clone();
+      dRight.derivate();
+
+      this.datum = EquationTree.operations.divide;
+
+      this.left = new EquationTree(
+        EquationTree.operations.subtract,
+        new EquationTree(
+          EquationTree.operations.multiply,
+          dLeft,
+          right,
+        ),
+        new EquationTree(
+          EquationTree.operations.multiply,
+          left,
+          dRight,
+        ),
+      );
+
+      this.right = new EquationTree(
+        EquationTree.operations.exponential,
+        right,
+        new EquationTree(2),
+      );
+
+
     }
 
     this.simplify();
