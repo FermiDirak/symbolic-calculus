@@ -2,11 +2,12 @@
   "name": "symbolic-calculus",
   "version": "0.1.1",
   "description": "Solves Calculus based equations",
-  "main": "index.js",
+  "main": "src/index.ts",
   "scripts": {
     "test": "jest",
     "start": "nodemon --exec ./node_modules/.bin/ts-node -- src/index.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "build-continuous": "tsc -w"
   },
   "repository": {
     "type": "git",

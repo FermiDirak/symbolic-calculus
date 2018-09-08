@@ -25,6 +25,11 @@ class ExpressionTree {
     cos: 'cos',
     tan: 'tan',
   }
+
+  static variables = {
+    x: 'x',
+    y: 'x',
+  }
 }
 
 
