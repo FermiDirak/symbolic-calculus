@@ -6,12 +6,12 @@ class EquationTree {
 
   constructor(
     datum: string | number,
-    left=null,
-    right=null,
+    left?: EquationTree | null,
+    right?: EquationTree | null,
   ) {
     this.datum = datum;
-    this.left = left;
-    this.right = right;
+    this.left = left || null;
+    this.right = right || null;
   }
 
   /** An enumeration of possible operations */

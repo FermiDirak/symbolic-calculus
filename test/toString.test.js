@@ -24,5 +24,4 @@ describe('toString', () => {
 
     expect(equation.toString()).toBe('sin x');
   });
-
 });

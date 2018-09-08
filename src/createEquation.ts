@@ -2,7 +2,7 @@ import EquationTree from './EquationTree';
 
 /** Parses an equation string and turns it into an equation tree
  * input must in polish notation form */
-function createEquation(equationString: string): EquationTree {
+function createEquation(equationString: string): EquationTree | null {
   equationString = equationString.trim();
 
   if (equationString[0] === '(') {
@@ -41,10 +41,6 @@ function createEquation(equationString: string): EquationTree {
     i += 1;
   }
 
-  if (equationArray.length === 0) {
-    return null;
-  }
-
   if (equationArray.length === 1) {
     const value = equationArray[0];
 
@@ -56,7 +52,10 @@ function createEquation(equationString: string): EquationTree {
   }
 
   if (equationArray.length === 2) {
-    return new EquationTree(equationArray[0], createEquation(equationArray[1]));
+    return new EquationTree(
+      equationArray[0],
+      createEquation(equationArray[1])
+    );
   }
 
   if (equationArray.length === 3) {
@@ -66,6 +65,8 @@ function createEquation(equationString: string): EquationTree {
       createEquation(equationArray[2]),
     );
   }
+
+  return null;
 }
 
 export default createEquation;
