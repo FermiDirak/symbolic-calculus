@@ -130,6 +130,73 @@ class EquationTree {
         return Math.tan(left.evaluate());
     }
   }
+
+  /** simplifies the equation tree */
+  simplify() {
+    if (this.left) {
+      this.left.simplify();
+    }
+
+    if (this.right) {
+      this.right.simplify();
+    }
+
+    if (this.datum === EquationTree.operations.multiply
+      && this.left && typeof(this.left.datum) === 'number'
+      && this.right && typeof(this.right.datum) === 'number'
+    ) {
+      this.datum = this.left.datum * this.right.datum;
+      this.left = null;
+      this.right = null;
+
+    } else if (this.datum === EquationTree.operations.divide
+      && this.left && typeof(this.left.datum) === 'number'
+      && this.right && typeof(this.right.datum) === 'number'
+    ) {
+      this.datum = this.left.datum / this.right.datum;
+      this.left = null;
+      this.right = null;
+    } else if (this.datum === EquationTree.operations.add
+      && this.left && typeof(this.left.datum) === 'number'
+      && this.right && typeof(this.right.datum) === 'number'
+    ) {
+      this.datum = this.left.datum + this.right.datum;
+      this.left = null;
+      this.right = null;
+    } else if (this.datum === EquationTree.operations.subtract
+      && this.left && typeof(this.left.datum) === 'number'
+      && this.right && typeof(this.right.datum) === 'number'
+    ) {
+      this.datum = this.left.datum - this.right.datum;
+      this.left = null;
+      this.right = null;
+    } else if (this.datum === EquationTree.operations.exponential
+      && this.left && typeof(this.left.datum) === 'number'
+      && this.right && typeof(this.right.datum) === 'number'
+    ) {
+      this.datum = Math.pow(this.left.datum, this.right.datum);
+      this.left = null;
+      this.right = null;
+    } else if (this.datum === EquationTree.operations.sin
+      && this.left && typeof(this.left.datum) === 'number'
+    ) {
+      this.datum = Math.sin(this.left.datum);
+      this.left = null;
+      this.right = null;
+    } else if (this.datum === EquationTree.operations.cos
+      && this.left && typeof(this.left.datum) === 'number'
+    ) {
+      this.datum = Math.cos(this.left.datum);
+      this.left = null;
+      this.right = null;
+    } else if (this.datum === EquationTree.operations.tan
+      && this.left && typeof(this.left.datum) === 'number'
+    ) {
+      this.datum = Math.tan(this.left.datum);
+      this.left = null;
+      this.right = null;
+    }
+  }
 }
 
 export default EquationTree;
