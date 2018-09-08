@@ -47,14 +47,51 @@ class EquationTree {
 
   /** prints the equation tree out as a string */
   toString(): string {
-    let string = '';
+    let equation = '';
 
+    equation += this.datum;
+
+    if (this.left) {
+      equation += ' ';
+
+      const isLeftLeaf = this.left.isLeaf();
+
+      if (!isLeftLeaf) {
+        equation += '(';
+      }
+
+      equation += this.left.toString();
+
+      if (!isLeftLeaf) {
+        equation += ')';
+      }
+    }
+
+    if (this.right) {
+      equation += ' ';
+
+      const isRightLeaf = this.right.isLeaf();
+
+      if (!isRightLeaf) {
+        equation += '(';
+      }
+
+      equation += this.right.toString();
+
+      if (!isRightLeaf) {
+        equation += ')';
+      }
+    }
+
+    return equation;
   }
 
   /** determines if equation tree node is a leaf */
   isLeaf(): boolean {
     return this.left === null && this.right === null;
   }
+
+
 
 }
 

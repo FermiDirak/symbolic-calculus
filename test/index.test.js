@@ -69,25 +69,10 @@
 //   });
 
 
-//   describe('.forEach', function() {
-//     it('should iterate over all elements in a EquationTree', function() {
-//       var actual = [];
-//       var expected = [ '+', 4, '/', '+', 3, '*', 5, 'x', 9 ];
-//       eq1.forEach(function(x) {
-//         actual.push(x);
-//       });
-//       assert.deepEqual(actual, expected);
-//     });
-//   });
-// });
-
-
 const SymbolicCalculus = require('./../src');
 
 test('Create Equation using Polish notation', () => {
   let equationTree1 = SymbolicCalculus.createEquation('(+ 4 (/ (+ 3 x) 9))');
-
-  console.log(equationTree1);
 });
 
 test('Hello World', () => {

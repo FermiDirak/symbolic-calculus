@@ -18,9 +18,11 @@ function createEquation(equationString: string): EquationTree {
     if (char === ' ') {
       equationArray.push('');
     } else if (char === '(') {
-      let parenCount = 0;
+      let parenCount = 1;
+      equationArray[equationArray.length - 1] = '('
 
-      do {
+      while (i < equationString.length && parenCount > 0) {
+        i += 1;
         char = equationString[i];
 
         if (char === '(') {
@@ -30,9 +32,7 @@ function createEquation(equationString: string): EquationTree {
         }
 
         equationArray[equationArray.length - 1] += char;
-
-        i += 1;
-      } while (i < equationString.length && parenCount > 0);
+      }
 
     } else {
       equationArray[equationArray.length - 1] += char;
