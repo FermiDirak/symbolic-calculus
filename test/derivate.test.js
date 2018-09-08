@@ -73,7 +73,13 @@ describe('derivate', () => {
       '+ (* 3 (^ x 2)) (* 2 (^ x 1))'
     );
 
-    console.log(equation.toString());
+    expect(equation.equals(result)).toBe(true);
+  });
+
+  test('should derivate composite equations (division)', () => {
+    let equation = SymbolicCalculus.createEquation('/ x 2');
+    equation.derivate();
+    const result = SymbolicCalculus.createEquation('0.5');
 
     expect(equation.equals(result)).toBe(true);
   });
