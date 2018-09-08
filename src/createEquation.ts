@@ -49,24 +49,20 @@ function createEquation(equationString: string): EquationTree | null {
     }
 
     return new EquationTree(parseFloat(value));
-  }
 
-  if (equationArray.length === 2) {
+  } else if (equationArray.length === 2) {
     return new EquationTree(
       equationArray[0],
-      createEquation(equationArray[1])
+      createEquation(equationArray[1]),
     );
-  }
 
-  if (equationArray.length === 3) {
+  } else {
     return new EquationTree(
       equationArray[0],
       createEquation(equationArray[1]),
       createEquation(equationArray[2]),
     );
   }
-
-  return null;
 }
 
 export default createEquation;
