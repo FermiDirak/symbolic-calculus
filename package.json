@@ -4,8 +4,9 @@
   "description": "Solves Calculus based equations",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha -w",
-    "start": "nodemon --exec ./node_modules/.bin/ts-node -- src/index.ts"
+    "test": "jest",
+    "start": "nodemon --exec ./node_modules/.bin/ts-node -- src/index.ts",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
