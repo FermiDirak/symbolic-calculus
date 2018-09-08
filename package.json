@@ -1,6 +1,6 @@
 {
   "name": "symbolic-calculus",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Solves Calculus based equations",
   "main": "src/index.ts",
   "scripts": {
