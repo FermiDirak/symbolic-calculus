@@ -4,8 +4,8 @@
   "description": "Solves Calculus based equations",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "test": "node_modules/.bin/mocha -w"
+    "test": "node_modules/.bin/mocha -w",
+    "start": "nodemon --exec ./node_modules/.bin/ts-node -- src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
   "homepage": "https://github.com/FermiDirak/symbolic-calculus#readme",
   "devDependencies": {
     "@types/node": "^10.9.4",
+    "jest": "^23.5.0",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.4",
     "should": "^13.2.3",
