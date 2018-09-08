@@ -166,6 +166,15 @@ class EquationTree {
       this.left = null;
       this.right = null;
 
+    } else if ((this.datum === EquationTree.operations.multiply
+      || this.datum === EquationTree.operations.divide)
+      && this.left && this.right &&
+      (this.left.datum === 0 || this.right.datum === 0)
+    ) {
+      this.datum = 0;
+      this.left = null;
+      this.right = null;
+
     } else if (this.datum === EquationTree.operations.add
       && this.left && typeof(this.left.datum) === 'number'
       && this.right && typeof(this.right.datum) === 'number'

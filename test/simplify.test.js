@@ -9,6 +9,14 @@ describe('simplify', () => {
     expect(equation.equals(simple)).toBe(true);
   });
 
+  test('should simplify multiplication against 0', () => {
+    let equation = SymbolicCalculus.createEquation('* 0 x');
+    equation.simplify();
+    const simple = SymbolicCalculus.createEquation('0');
+
+    expect(equation.equals(simple)).toBe(true);
+  });
+
   test('should simplify divison', () => {
     let equation = SymbolicCalculus.createEquation('/ 5 10');
     equation.simplify();
