@@ -1,6 +1,6 @@
 {
   "name": "symbolic-calculus",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Solves Calculus based equations",
   "main": "index.js",
   "scripts": {
@@ -22,8 +22,11 @@
   },
   "homepage": "https://github.com/FermiDirak/symbolic-calculus#readme",
   "devDependencies": {
-    "mocha": "^5.0.0",
-    "nodemon": "^1.14.11",
-    "should": "^13.2.1"
+    "@types/node": "^10.9.4",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.4",
+    "should": "^13.2.3",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.0.3"
   }
 }

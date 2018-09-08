@@ -1,3 +1,32 @@
+
+// /**
+//  * An Expression Tree is a tree with a datum that's an operation,
+//  * and child nodes that are either values or equation trees
+//  * @param datum The datum value
+//  * @param left The left node
+//  * @param right The right node
+//  * @return and expression tree representing the equation
+//  */
+// class ExpressionTree {
+//   constructor(datum, left, right) {
+//     this.datum = datum;
+//     this.left = left;
+//     this.right = right;
+//   }
+
+//   /** An enumeration of possible operations */
+//   static operations = {
+//     multiply: '*',
+//     divide: '/',
+//     add: '+',
+//     subtract: '-',
+//     exponential: '^',
+//     sin: 'sin',
+//     cos: 'cos',
+//     tan: 'tan',
+//   }
+// }
+
 /**
  * An Equation Tree is a tree with a datum that's an operation
  * and child nodes that are either values or equation trees
@@ -8,9 +37,7 @@ var EquationTree = function(datum, left, right) {
   this.right = right;
 }
 
-/**
- * An enumeration of possible EquationTree operations
- */
+/** An enumeration of possible EquationTree operations */
 EquationTree.operations = {
   multiply: '*',
   divide: '/',
@@ -22,9 +49,7 @@ EquationTree.operations = {
   tan: 'tan',
 }
 
-/**
- * An enumeration of possible symbols
- */
+/** An enumeration of possible symbols */
 EquationTree.symbols = {
   x: 'x',
   y: 'y',
@@ -259,6 +284,10 @@ EquationTree.prototype.toString = function() {
   }
 
   return string;
+}
+
+const SymbolicCalculus = {
+  createExpressionTree: (expression) => new ExpressionTree.create(expression),
 }
 
 module.exports = EquationTree;

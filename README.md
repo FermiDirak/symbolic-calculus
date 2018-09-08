@@ -31,7 +31,9 @@ None :)
 
 We are currently looking for contributors. If you want to help out, check out https://github.com/fermidirak/symbolic-calculus and look for any tags labeled `help wanted`. This is a great way to get started with open source.
 
-Fork it (https://github.com/fermidirak/symbolic-calculus/fork)
+#####To begin contributing:
+
+Fork the project (https://github.com/fermidirak/symbolic-calculus/fork)
 Create your feature branch (git checkout -b feature/fooBar)
 Commit your changes (git commit -am 'Add some fooBar')
 Push to the branch (git push origin feature/fooBar)
