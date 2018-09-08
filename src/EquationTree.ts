@@ -28,10 +28,28 @@ class EquationTree {
 
   static variables = {
     x: 'x',
-    y: 'x',
+    y: 'y',
   }
 
+  /** determines if input value is a variable or not */
+  static isVariable(str: string) {
+    const variables = Object.values(EquationTree.variables);
 
+    return !(variables.indexOf(str) === -1);
+  }
+
+  /** determines if input value is an operator or not */
+  static isOperator(str: string) {
+    const variables = Object.values(EquationTree.variables);
+
+    return !(variables.indexOf(str) === -1);
+
+  }
+
+  /** determines if input value is a number or not */
+  static isNumber(str: string) {
+
+  }
 }
 
 export default EquationTree;

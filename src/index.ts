@@ -237,6 +237,13 @@
 
 
 import createEquation from './createEquation';
+import EquationTree from './EquationTree';
 
-export default createEquation;
-export { createEquation };
+
+
+export = {
+  createEquation,
+  isVariable: EquationTree.isVariable,
+  isSymbol: EquationTree.isSymbol,
+  isNumber: EquationTree.isNumber,
+ };
