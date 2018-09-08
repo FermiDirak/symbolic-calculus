@@ -91,7 +91,10 @@ class EquationTree {
     return this.left === null && this.right === null;
   }
 
-
+  /** Determines if the given equation is equivalent */
+  equals(other: EquationTree): boolean {
+    return this.toString() === other.toString();
+  }
 
 }
 
