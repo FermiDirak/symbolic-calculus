@@ -9,8 +9,32 @@ describe('derivate', () => {
     expect(equation.equals(result)).toBe(true);
   });
 
-  test('should derivate variables', () => {
+  test('should derivate x to 1', () => {
     let equation = SymbolicCalculus.createEquation('x');
+    equation.derivate();
+    const result = SymbolicCalculus.createEquation('1');
+
+    expect(equation.equals(result)).toBe(true);
+  });
+
+  test('should derivate y to 0', () => {
+    let equation = SymbolicCalculus.createEquation('x');
+    equation.derivate();
+    const result = SymbolicCalculus.createEquation('1');
+
+    expect(equation.equals(result)).toBe(true);
+  });
+
+  test('should derivate composite equations (addition)', () => {
+    let equation = SymbolicCalculus.createEquation('+ x 3');
+    equation.derivate();
+    const result = SymbolicCalculus.createEquation('1');
+
+    expect(equation.equals(result)).toBe(true);
+  });
+
+  test('should derivate composite equations (subtraction)', () => {
+    let equation = SymbolicCalculus.createEquation('- x 3');
     equation.derivate();
     const result = SymbolicCalculus.createEquation('1');
 
@@ -25,17 +49,12 @@ describe('derivate', () => {
     expect(equation.equals(result)).toBe(true);
   });
 
-  test('should derivate composite equations (addition)', () => {
-    let equation = SymbolicCalculus.createEquation('+ x 3');
-    equation.derivate();
-    const result = SymbolicCalculus.createEquation('1');
-
-    expect(equation.equals(result)).toBe(true);
-  });
-
   test('should derivate composite equations (multiplication) 1', () => {
     let equation = SymbolicCalculus.createEquation('* 3 x');
     equation.derivate();
+
+    console.log(equation.toString());
+
     const result = SymbolicCalculus.createEquation('3');
 
     expect(equation.equals(result)).toBe(true);

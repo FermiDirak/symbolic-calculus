@@ -1,3 +1,5 @@
+import createEquation from './createEquation';
+
 /** A tree that represents a mathematical expression */
 class EquationTree {
   datum: string | number;
@@ -131,6 +133,13 @@ class EquationTree {
     }
   }
 
+  /** Clones the Equation Tree */
+  clone(): EquationTree | null {
+    const equationString = this.toString();
+
+    return createEquation(equationString);
+  }
+
   /** simplifies the equation tree */
   simplify() {
     if (this.left) {
@@ -203,6 +212,87 @@ class EquationTree {
       this.right = null;
 
     }
+  }
+
+  /** finds the derivative with respect to x */
+  derivate() {
+    /** differentiation rules:
+     * d/dx(c) => 0
+     * d/dx(x) => 1
+     * d/dx(y) => 0
+     * d/dx(u +/- v) => d/dx(u) +/- d/dx(v)
+     * d/dx(u * v) => u * d/dx(v) + v * d/dx(u)
+     */
+
+    // d/dx(c) => 0
+    if (this.isLeaf() && typeof(this.datum) === 'number') {
+      this.datum = 0;
+      this.left = null;
+      this.right = null;
+
+    // d/dx(x) => 1
+    } else if (this.isLeaf()
+      && this.datum === EquationTree.variables['x']
+    ) {
+      this.datum = 1;
+      this.left = null;
+      this.right = null;
+
+    // d/dx(y) => 0
+    } else if (this.isLeaf()
+      && this.datum === EquationTree.variables['y']
+    ) {
+      this.datum = 0;
+      this.left = null;
+      this.right = null;
+
+    // d/dx(u + v) => d/dx(u) + d/dx(v)
+    } else if (this.datum === EquationTree.operations.add
+      && this.left && this.right
+    ) {
+      this.left.derivate();
+      this.right.derivate();
+
+    // d/dx(u - v) => d/dx(u) - d/dx(v)
+    } else if (this.datum === EquationTree.operations.subtract
+      && this.left && this.right
+    ) {
+      this.left.derivate();
+      this.right.derivate();
+
+    // d/dx(u * v) => u * d/dx(v) + v * d/dx(u)
+    } else if (this.datum === EquationTree.operations.multiply
+      && this.left && this.right
+    ) {
+      let left = this.left.clone();
+      let right = this.right.clone();
+
+      let dLeft = this.left.clone();
+      dLeft.derivate();
+
+      let dRight = this.right.clone();
+      dRight.derivate();
+
+
+      console.log(left)
+      console.log(dLeft)
+      console.log(right)
+      console.log(dRight);
+
+      this.datum = EquationTree.operations.add;
+      this.left = new EquationTree(
+        EquationTree.operations.multiply,
+        left,
+        dRight,
+      );
+      this.right = new EquationTree(
+        EquationTree.operations.multiply,
+        dLeft,
+        right,
+      );
+    }
+
+    this.simplify();
   }
 }
 
