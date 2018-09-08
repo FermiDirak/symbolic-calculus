@@ -46,16 +46,12 @@ describe('derivate', () => {
     equation.derivate();
     const result = SymbolicCalculus.createEquation('* 3 (^ x 2)');
 
-    console.log(equation.toString());
-
     expect(equation.equals(result)).toBe(true);
   });
 
   test('should derivate composite equations (multiplication) 1', () => {
     let equation = SymbolicCalculus.createEquation('* 3 x');
     equation.derivate();
-
-    console.log(equation.toString());
 
     const result = SymbolicCalculus.createEquation('3');
 
@@ -71,11 +67,13 @@ describe('derivate', () => {
   });
 
   test('should derivate composite equations (multiplication) 3', () => {
-    let equation = SymbolicCalculus.createEquation(
-      '+ (^ x 3) (- (* 2 (^ x 2)) (+ (* 4 x) 3))'
-    );
+    let equation = SymbolicCalculus.createEquation('+ (^ x 3) (^ x 2)');
     equation.derivate();
-    const result = SymbolicCalculus.createEquation('3');
+    const result = SymbolicCalculus.createEquation(
+      '+ (* 3 (^ x 2)) (* 2 (^ x 1))'
+    );
+
+    console.log(equation.toString());
 
     expect(equation.equals(result)).toBe(true);
   });

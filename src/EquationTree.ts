@@ -175,6 +175,21 @@ class EquationTree {
       this.left = null;
       this.right = null;
 
+    } else if (this.datum === EquationTree.operations.multiply
+      && this.left && this.right &&
+      (this.left.datum === 1 || this.right.datum === 1)
+    ) {
+
+      if (this.left.datum === 1) {
+        this.datum = this.right.datum;
+        this.left = this.right.left;
+        this.right = this.right.right;
+      } else {
+        this.datum = this.left.datum;
+        this.right = this.left.right;
+        this.left = this.left.left;
+      }
+
     } else if (this.datum === EquationTree.operations.add
       && this.left && typeof(this.left.datum) === 'number'
       && this.right && typeof(this.right.datum) === 'number'
@@ -345,7 +360,7 @@ class EquationTree {
       let dRight = this.right.clone();
 
       if (typeof(dRight.datum) === 'number') {
-        dRight.datum -= 1;
+        dRight.datum = dRight.datum - 1;
       }
 
       this.datum = EquationTree.operations.multiply;

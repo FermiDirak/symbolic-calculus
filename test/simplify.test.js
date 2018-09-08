@@ -17,6 +17,22 @@ describe('simplify', () => {
     expect(equation.equals(simple)).toBe(true);
   });
 
+  test('should simplify multiplication against 1', () => {
+    let equation = SymbolicCalculus.createEquation('* 1 x');
+    equation.simplify();
+    const simple = SymbolicCalculus.createEquation('x');
+
+    expect(equation.equals(simple)).toBe(true);
+  });
+
+  test('should simplify multiplication against 1 with variable', () => {
+    let equation = SymbolicCalculus.createEquation('* (^ x 2) 1');
+    equation.simplify();
+    const simple = SymbolicCalculus.createEquation('^ x 2');
+
+    expect(equation.equals(simple)).toBe(true);
+  });
+
   test('should simplify divison', () => {
     let equation = SymbolicCalculus.createEquation('/ 5 10');
     equation.simplify();
