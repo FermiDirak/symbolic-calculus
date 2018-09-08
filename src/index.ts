@@ -244,6 +244,6 @@ import EquationTree from './EquationTree';
 export = {
   createEquation,
   isVariable: EquationTree.isVariable,
-  isSymbol: EquationTree.isSymbol,
+  isOperator: EquationTree.isOperator,
   isNumber: EquationTree.isNumber,
  };

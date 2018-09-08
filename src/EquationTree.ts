@@ -32,22 +32,22 @@ class EquationTree {
   }
 
   /** determines if input value is a variable or not */
-  static isVariable(str: string) {
+  static isVariable(str: string): boolean {
     const variables = Object.values(EquationTree.variables);
 
     return !(variables.indexOf(str) === -1);
   }
 
   /** determines if input value is an operator or not */
-  static isOperator(str: string) {
-    const variables = Object.values(EquationTree.variables);
+  static isOperator(str: string): boolean {
+    const operations = Object.values(EquationTree.operations);
 
-    return !(variables.indexOf(str) === -1);
+    return !(operations.indexOf(str) === -1);
 
   }
 
   /** determines if input value is a number or not */
-  static isNumber(str: string) {
+  static isNumber(str: string): boolean {
 
   }
 }
