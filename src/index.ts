@@ -1,70 +1,5 @@
 
 
-
-
-/** An Expression Tree is a tree that represents a mathematical expression */
-class ExpressionTree {
-  datum: string | number;
-  left: ExpressionTree | null;
-  right: ExpressionTree | null;
-
-  constructor(datum: string | number, left: ExpressionTree, right: ExpressionTree) {
-    this.datum = datum;
-    this.left = left;
-    this.right = right;
-  }
-
-  /** An enumeration of possible operations */
-  static operations = {
-    multiply: '*',
-    divide: '/',
-    add: '+',
-    subtract: '-',
-    exponential: '^',
-    sin: 'sin',
-    cos: 'cos',
-    tan: 'tan',
-  }
-
-  static variables = {
-    x: 'x',
-    y: 'x',
-  }
-}
-
-
-// /**
-//  * An Equation Tree is a tree with a datum that's an operation
-//  * and child nodes that are either values or equation trees
-//  */
-// var EquationTree: EquationTreeNode = function(
-//   datum: string | number,
-//   left: EquationTreeNode,
-//   right: EquationTreeNode,
-// ) {
-//   this.datum = datum;
-//   this.left = left;
-//   this.right = right;
-// }
-
-// /** An enumeration of possible EquationTree operations */
-// EquationTree.operations = {
-//   multiply: '*',
-//   divide: '/',
-//   add: '+',
-//   subtract: '-',
-//   exponential: '^',
-//   sin: 'sin',
-//   cos: 'cos',
-//   tan: 'tan',
-// }
-
-// /** An enumeration of possible symbols */
-// EquationTree.symbols = {
-//   x: 'x',
-//   y: 'y',
-// }
-
 // /**
 //  * Parses an expression string and turns it into an equation tree
 //  * @param equationString String to parse into an equationTree
@@ -297,7 +232,11 @@ class ExpressionTree {
 // }
 
 // const SymbolicCalculus = {
-//   createExpressionTree: (expression) => new ExpressionTree.create(expression),
+//   createEquationTree: (expression) => new EquationTree.create(expression),
 // }
 
-module.exports = ExpressionTree;
+
+import createEquation from './createEquation';
+
+export default createEquation;
+export { createEquation };

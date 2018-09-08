@@ -82,7 +82,12 @@
 // });
 
 
-let EquationTree = require('./../src/index');
+const SymbolicCalculus = require('./../src');
+
+test('Create Equation using Polish notation', () => {
+  let equationTree1 = SymbolicCalculus.createEquation('(+ 4 (/ (+ 3 (* 5 x)) 9))');
+})
+
 
 test('Hello World', () => {
   expect(1 + 1).toBe(2);

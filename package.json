@@ -29,7 +29,18 @@
     "mocha": "^5.2.0",
     "nodemon": "^1.18.4",
     "should": "^13.2.3",
+    "ts-jest": "^23.1.4",
     "ts-node": "^7.0.1",
     "typescript": "^3.0.3"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "/test/.*\\.(ts|tsx|js)$"
   }
 }
