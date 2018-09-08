@@ -41,38 +41,31 @@ function createEquation(equationString: string): EquationTree {
     i += 1;
   }
 
-  if (equationArray.length === 1) {
-    const element = equationArray[0];
-
-    if (element)
-
-    return EquationTree(parseFloat(element));
-  }
-
-  // for (let i = 0; i < equationString.length; ++i) {
-  //   let char = equationString[i];
-
-  //   if (char === '(') {
-  //     parenCount += 1;
-  //   } else if (char === ')') {
-  //     parenCount -= 1;
-  //   }
-
-  //   equationArray[equationArray.length - 1] += char;
-
-  // }
-
-  console.log(equationArray);
-
   if (equationArray.length === 0) {
     return null;
   }
 
   if (equationArray.length === 1) {
+    const value = equationArray[0];
 
+    if (EquationTree.isVariable(value)) {
+      return new EquationTree(value);
+    }
+
+    return new EquationTree(parseFloat(value));
   }
 
-  return new EquationTree(5);
+  if (equationArray.length === 2) {
+    return new EquationTree(equationArray[0], createEquation(equationArray[1]));
+  }
+
+  if (equationArray.length === 3) {
+    return new EquationTree(
+      equationArray[0],
+      createEquation(equationArray[1]),
+      createEquation(equationArray[2]),
+    );
+  }
 }
 
 export default createEquation;

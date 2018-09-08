@@ -245,5 +245,4 @@ export = {
   createEquation,
   isVariable: EquationTree.isVariable,
   isOperator: EquationTree.isOperator,
-  isNumber: EquationTree.isNumber,
  };

@@ -43,13 +43,19 @@ class EquationTree {
     const operations = Object.values(EquationTree.operations);
 
     return !(operations.indexOf(str) === -1);
+  }
+
+  /** prints the equation tree out as a string */
+  toString(): string {
+    let string = '';
 
   }
 
-  /** determines if input value is a number or not */
-  static isNumber(str: string): boolean {
-
+  /** determines if equation tree node is a leaf */
+  isLeaf(): boolean {
+    return this.left === null && this.right === null;
   }
+
 }
 
 export default EquationTree;
