@@ -1,10 +1,10 @@
 ### symbolic-calculus.js
 
-symbolic-calculus.js is a Node.js module for symbolicly evaluating mathematical expressions using calculus.
+symbolic-calculus.js is a Node.js module for symbolicly evaluating mathematical expressions.
 
 ### Using the module
 
-install the module to use the library in your project
+install the module in your project with
 
 ```
 npm install symbolic-calculus
@@ -12,20 +12,23 @@ npm install symbolic-calculus
 yarn add symbolic-calculus
 ```
 
-Require the symoblic-calculus module and use it evaluate derivatives and integrals of symbolic mathematical expressions.
+`Require` or `import` the symoblic-calculus module and use it evaluate derivatives and integrals of symbolic mathematical expressions.
 
 ```
 const SymbolicCalculus = require('symbolic-calculus');
 
-let expressionTree = SymbolicCalculus.createExpressionTree('5x + 3');
-let derivative = expressionTree.derivate();
+// 5x + 3
+let equation = SymbolicCalculus.createEquation('+ (* 5 x) 3)');
+equation.derivate();
 
-console.log(derivative.toString()); => '5'
+console.log(equation.toString()); => '5'
 ```
 
 ### Dependencies
 
 None :)
+
+The project is built in Typescript and transpiles down to ES2016, and is therefore useable across the vast majority of platforms.
 
 ### Contributing
 
@@ -41,7 +44,7 @@ Create a new Pull Request
 
 ### Testing
 
-symbolic-calculus.js uses mocha for testing. Tests can be found in `test/index.js`. To test, use `npm run test` or `yarn test`
+symbolic-calculus.js uses Jest for testing. Tests can be found in `./test`. To test, use `npm run test` or `yarn test`, and to see test coverage, run `npm run coverage` or `yarn coverage`.
 
 ### Credits
 
