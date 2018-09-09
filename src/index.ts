@@ -5,4 +5,4 @@ export = {
   createEquation,
   isVariable: EquationTree.isVariable,
   isOperator: EquationTree.isOperator,
- };
+};

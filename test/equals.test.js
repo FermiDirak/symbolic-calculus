@@ -1,4 +1,4 @@
-const SymbolicCalculus = require('./../src');
+const SymbolicCalculus = require('../src');
 
 describe('equals', () => {
   test('two equivalent equations should be equal', () => {

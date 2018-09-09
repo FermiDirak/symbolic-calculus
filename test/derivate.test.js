@@ -83,4 +83,4 @@ describe('derivate', () => {
 
     expect(equation.equals(result)).toBe(true);
   });
-})
+});
