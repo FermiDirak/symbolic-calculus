@@ -239,7 +239,7 @@ class EquationTree {
   }
 
   /** finds the derivative with respect to x */
-  derivate() {
+  derivate(): EquationTree {
     /** differentiation rules:
      * d/dx(c) => 0
      * d/dx(x) => 1
