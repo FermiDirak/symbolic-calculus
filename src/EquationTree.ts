@@ -250,83 +250,79 @@ class EquationTree {
      * d/dx(u^c) = c * u^(c-1) * d/dx(u)
      */
 
+    let clone = this.clone();
+
     // d/dx(c) => 0
-    if (this.isLeaf() && typeof(this.datum) === 'number') {
-      this.datum = 0;
-      this.left = null;
-      this.right = null;
+    if (clone.isLeaf() && typeof(clone.datum) === 'number') {
+      clone.datum = 0;
+      clone.left = null;
+      clone.right = null;
 
     // d/dx(x) => 1
-    } else if (this.isLeaf()
-      && this.datum === EquationTree.variables['x']
+    } else if (clone.isLeaf()
+      && clone.datum === EquationTree.variables['x']
     ) {
-      this.datum = 1;
-      this.left = null;
-      this.right = null;
+      clone.datum = 1;
+      clone.left = null;
+      clone.right = null;
 
     // d/dx(y) => 0
-    } else if (this.isLeaf()
-      && this.datum === EquationTree.variables['y']
+    } else if (clone.isLeaf()
+      && clone.datum === EquationTree.variables['y']
     ) {
-      this.datum = 0;
-      this.left = null;
-      this.right = null;
+      clone.datum = 0;
+      clone.left = null;
+      clone.right = null;
 
     // d/dx(u + v) => d/dx(u) + d/dx(v)
-    } else if (this.datum === EquationTree.operations.add
-      && this.left && this.right
+    } else if (clone.datum === EquationTree.operations.add
+      && clone.left && clone.right
     ) {
-      this.left.derivate();
-      this.right.derivate();
+      clone.left = clone.left.derivate();
+      clone.right = clone.right.derivate();
 
     // d/dx(u - v) => d/dx(u) - d/dx(v)
-    } else if (this.datum === EquationTree.operations.subtract
-      && this.left && this.right
+    } else if (clone.datum === EquationTree.operations.subtract
+      && clone.left && clone.right
     ) {
-      this.left.derivate();
-      this.right.derivate();
+      clone.left = clone.left.derivate();
+      clone.right = clone.right.derivate();
 
     // d/dx(u * v) => u * d/dx(v) + v * d/dx(u)
-    } else if (this.datum === EquationTree.operations.multiply
-      && this.left && this.right
+    } else if (clone.datum === EquationTree.operations.multiply
+      && clone.left && clone.right
     ) {
-      let left = this.left.clone();
-      let right = this.right.clone();
+      let left = clone.left;
+      let right = clone.right;
 
-      let dLeft = this.left.clone();
-      dLeft.derivate();
+      let dLeft = clone.left.derivate();
+      let dRight = clone.right.derivate();
 
-      let dRight = this.right.clone();
-      dRight.derivate();
-
-      this.datum = EquationTree.operations.add;
-      this.left = new EquationTree(
+      clone.datum = EquationTree.operations.add;
+      clone.left = new EquationTree(
         EquationTree.operations.multiply,
         left,
         dRight,
       );
-      this.right = new EquationTree(
+      clone.right = new EquationTree(
         EquationTree.operations.multiply,
         dLeft,
         right,
       );
 
     // d/dx(u / v) = (v * d/dx(u) - u * d/dx(v)) / v^2
-    } else if (this.datum === EquationTree.operations.divide
-      && this.left && this.right
+    } else if (clone.datum === EquationTree.operations.divide
+      && clone.left && clone.right
     ) {
-      let left = this.left.clone();
-      let right = this.right.clone();
+      let left = clone.left;
+      let right = clone.right;
 
-      let dLeft = this.left.clone();
-      dLeft.derivate();
+      let dLeft = clone.left.derivate();
+      let dRight = clone.right.derivate();
 
-      let dRight = this.right.clone();
-      dRight.derivate();
+      clone.datum = EquationTree.operations.divide;
 
-      this.datum = EquationTree.operations.divide;
-
-      this.left = new EquationTree(
+      clone.left = new EquationTree(
         EquationTree.operations.subtract,
         new EquationTree(
           EquationTree.operations.multiply,
@@ -340,32 +336,30 @@ class EquationTree {
         ),
       );
 
-      this.right = new EquationTree(
+      clone.right = new EquationTree(
         EquationTree.operations.exponential,
         right,
         new EquationTree(2),
       );
 
     // d/dx(u^c) = c * u^(c-1) * d/dx(u)
-    } else if (this.datum === EquationTree.operations.exponential
-      && this.left && this.right && typeof(this.right.datum) === 'number'
+    } else if (clone.datum === EquationTree.operations.exponential
+      && clone.left && clone.right && typeof(clone.right.datum) === 'number'
     ) {
 
-      let left = this.left.clone();
-      let right = this.right.clone();
+      let left = clone.left;
+      let right = clone.right;
 
-      let dLeft = this.left.clone();
-      dLeft.derivate();
-
-      let dRight = this.right.clone();
+      let dLeft = clone.left.derivate();
+      let dRight = clone.right.clone();
 
       if (typeof(dRight.datum) === 'number') {
         dRight.datum = dRight.datum - 1;
       }
 
-      this.datum = EquationTree.operations.multiply;
-      this.left = right;
-      this.right = new EquationTree(
+      clone.datum = EquationTree.operations.multiply;
+      clone.left = right;
+      clone.right = new EquationTree(
         EquationTree.operations.multiply,
         new EquationTree(
           EquationTree.operations.exponential,
@@ -377,7 +371,9 @@ class EquationTree {
 
     }
 
-    this.simplify();
+    clone.simplify();
+
+    return clone;
   }
 }
 
