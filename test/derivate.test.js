@@ -99,8 +99,15 @@ describe('derivate', () => {
       '* (cos (^ x 2)) (* 2 (^ x 1))'
     );
 
-    console.log(derivative.toString());
+    expect(derivative.equals(expected)).toBe(true);
+  });
 
+  test('should derivate equations with tan', () => {
+    const equation = SymbolicCalculus.createEquation('tan x');
+    const derivative = equation.derivate();
+    const expected = SymbolicCalculus.createEquation(
+      '+ 1 (^ (tan x) 2)'
+    );
 
     expect(derivative.equals(expected)).toBe(true);
   });

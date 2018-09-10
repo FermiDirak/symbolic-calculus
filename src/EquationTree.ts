@@ -250,6 +250,7 @@ class EquationTree {
      * d/dx(u^c) => c * u^(c-1) * d/dx(u)
      * d/dx(cos(u)) => -sin(u) * d/dx(u)
      * d/dx(sin(u)) => cos(u) * d/dx(u)
+     * d/dx(tan(u)) => (1 + tan^2(u)) * d/dx(u)
      */
 
     let clone = this.clone();
@@ -294,11 +295,11 @@ class EquationTree {
     } else if (clone.datum === EquationTree.operations.multiply
       && clone.left && clone.right
     ) {
-      let left = clone.left;
-      let right = clone.right;
+      const left = clone.left;
+      const right = clone.right;
 
-      let dLeft = clone.left.derivate();
-      let dRight = clone.right.derivate();
+      const dLeft = clone.left.derivate();
+      const dRight = clone.right.derivate();
 
       clone.datum = EquationTree.operations.add;
       clone.left = new EquationTree(
@@ -316,11 +317,11 @@ class EquationTree {
     } else if (clone.datum === EquationTree.operations.divide
       && clone.left && clone.right
     ) {
-      let left = clone.left;
-      let right = clone.right;
+      const left = clone.left;
+      const right = clone.right;
 
-      let dLeft = clone.left.derivate();
-      let dRight = clone.right.derivate();
+      const dLeft = clone.left.derivate();
+      const dRight = clone.right.derivate();
 
       clone.datum = EquationTree.operations.divide;
 
@@ -349,11 +350,11 @@ class EquationTree {
       && clone.left && clone.right && typeof(clone.right.datum) === 'number'
     ) {
 
-      let left = clone.left;
-      let right = clone.right;
+      const left = clone.left;
+      const right = clone.right;
 
-      let dLeft = clone.left.derivate();
-      let dRight = clone.right.clone();
+      const dLeft = clone.left.derivate();
+      const dRight = clone.right.clone();
 
       if (typeof(dRight.datum) === 'number') {
         dRight.datum = dRight.datum - 1;
@@ -376,8 +377,8 @@ class EquationTree {
       && clone.left
     ) {
 
-      let left = clone.left.clone();
-      let dLeft = clone.left.derivate();
+      const left = clone.left.clone();
+      const dLeft = clone.left.derivate();
 
       clone.datum = EquationTree.operations.multiply;
       clone.left = new EquationTree(
@@ -395,8 +396,8 @@ class EquationTree {
       && clone.left
     ) {
 
-      let left = clone.left.clone();
-      let dLeft = clone.left.derivate();
+      const left = clone.left.clone();
+      const dLeft = clone.left.derivate();
 
       clone.datum = EquationTree.operations.multiply;
       clone.left = new EquationTree(
@@ -405,6 +406,27 @@ class EquationTree {
       );
       clone.right = dLeft;
 
+    // d/dx(tan(u)) => (1 + tan^2(u)) * d/dx(u)
+    } else if (clone.datum === EquationTree.operations.tan
+      && clone.left
+    ) {
+      const left = clone.left.clone();
+      const dLeft = clone.left.derivate();
+
+      clone.datum = EquationTree.operations.multiply;
+      clone.left = new EquationTree(
+        EquationTree.operations.add,
+        new EquationTree(1),
+        new EquationTree(
+          EquationTree.operations.exponential,
+          new EquationTree(
+            EquationTree.operations.tan,
+            left,
+          ),
+          new EquationTree(2),
+        ),
+      );
+      clone.right = dLeft;
     }
 
     clone.simplify();
