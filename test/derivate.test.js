@@ -83,4 +83,25 @@ describe('derivate', () => {
 
     expect(derivative.equals(expected)).toBe(true);
   });
+
+  test('should derivate equations with cos', () => {
+    const equation = SymbolicCalculus.createEquation('cos x');
+    const derivative = equation.derivate();
+    const expected = SymbolicCalculus.createEquation(' * -1 (sin x)');
+
+    expect(derivative.equals(expected)).toBe(true);
+  });
+
+  test('should derivate equations with sin', () => {
+    const equation = SymbolicCalculus.createEquation('sin (^ x 2)');
+    const derivative = equation.derivate();
+    const expected = SymbolicCalculus.createEquation(
+      '* (cos (^ x 2)) (* 2 (^ x 1))'
+    );
+
+    console.log(derivative.toString());
+
+
+    expect(derivative.equals(expected)).toBe(true);
+  });
 });

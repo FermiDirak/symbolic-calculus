@@ -246,8 +246,10 @@ class EquationTree {
      * d/dx(y) => 0
      * d/dx(u +/- v) => d/dx(u) +/- d/dx(v)
      * d/dx(u * v) => u * d/dx(v) + v * d/dx(u)
-     * d/dx(u / v) = (v * d/dx(u) - u * d/dx(v)) / v^2
-     * d/dx(u^c) = c * u^(c-1) * d/dx(u)
+     * d/dx(u / v) => (v * d/dx(u) - u * d/dx(v)) / v^2
+     * d/dx(u^c) => c * u^(c-1) * d/dx(u)
+     * d/dx(cos(u)) => -sin(u) * d/dx(u)
+     * d/dx(sin(u)) => cos(u) * d/dx(u)
      */
 
     let clone = this.clone();
@@ -368,6 +370,40 @@ class EquationTree {
         ),
         dLeft,
       );
+
+    // d/dx(cos(u)) => -sin(u) * d/dx(u)
+    } else if (clone.datum === EquationTree.operations.cos
+      && clone.left
+    ) {
+
+      let left = clone.left.clone();
+      let dLeft = clone.left.derivate();
+
+      clone.datum = EquationTree.operations.multiply;
+      clone.left = new EquationTree(
+        EquationTree.operations.multiply,
+        new EquationTree(-1),
+        new EquationTree(
+          EquationTree.operations.sin,
+          left,
+        ),
+      );
+      clone.right = dLeft;
+
+    // d/dx(sin(u)) => cos(u) * d/dx(u)
+    } else if (clone.datum === EquationTree.operations.sin
+      && clone.left
+    ) {
+
+      let left = clone.left.clone();
+      let dLeft = clone.left.derivate();
+
+      clone.datum = EquationTree.operations.multiply;
+      clone.left = new EquationTree(
+        EquationTree.operations.cos,
+        left,
+      );
+      clone.right = dLeft;
 
     }
 
