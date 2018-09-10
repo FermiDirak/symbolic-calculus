@@ -433,6 +433,22 @@ class EquationTree {
 
     return clone;
   }
+
+  /** finds the integral of an equation wrt x */
+  integrate(): EquationTree {
+    /** integration rules:
+     * int(c) => c * x
+     * int(x) => x^2 / 2
+     * int(c * u) => c * int(u)
+     * int(u +/- v) => int(u) +/- int(v)
+     * int(u^n) => u^n+1 / n + 1
+     * int(n/u) => n * ln(u)
+     * int(a^u) => (1/ln(a)) * a^u
+     * int(sin(u)) => -cos(u)
+     * int(cos(u)) => sin(u)
+     * int(tan(u)) => -ln(cos(u))
+     */
+  }
 }
 
 export default EquationTree;
