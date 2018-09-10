@@ -19,9 +19,9 @@ const SymbolicCalculus = require('symbolic-calculus');
 
 // 5x + 3
 let equation = SymbolicCalculus.createEquation('+ (* 5 x) 3)');
-equation.derivate();
+let derivative = equation.derivate();
 
-console.log(equation.toString()); => '5'
+console.log(derivative.toString()); => '5'
 ```
 
 ### Dependencies
