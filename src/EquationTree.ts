@@ -433,6 +433,68 @@ class EquationTree {
 
     return clone;
   }
+
+  /** finds the integral of an equation wrt x */
+  integrate(): EquationTree {
+    /** integration rules:
+     * int(c) => c * x
+     * int(x) => x^2 / 2
+     * int(c * u) => c * int(u)
+     * int(u +/- v) => int(u) +/- int(v)
+     * int(u^n) => u^n+1 / n + 1
+     * int(n/u) => n * ln(u)
+     * int(a^u) => (1/ln(a)) * a^u
+     * int(sin(u)) => -cos(u)
+     * int(cos(u)) => sin(u)
+     * int(tan(u)) => -ln(cos(u))
+     */
+
+    let clone = this.clone();
+
+    // int(c) => c * x
+    if (clone.isLeaf() && typeof(clone.datum) === 'number') {
+      const datum = clone.datum;
+
+      clone.datum = EquationTree.operations.multiply;
+      clone.left = new EquationTree(datum);
+      clone.right = new EquationTree(EquationTree.variables.x);
+
+    // int(x) => x^2 / 2
+    } else if (clone.isLeaf() && EquationTree.isVariable(clone.datum)) {
+      clone.datum = EquationTree.operations.divide;
+      clone.left = new EquationTree(
+        EquationTree.operations.exponential,
+        new EquationTree(EquationTree.variables.x),
+        new EquationTree(2),
+      );
+      clone.right = new EquationTree(2);
+
+    // int(c * u) => c * int(u)
+    } else if (clone.datum === EquationTree.operations.multiply
+      && clone.left && clone.right
+      && typeof(clone.left.datum) === 'number'
+    ) {
+      clone.right = clone.right.integrate();
+
+    // int(c * u) => c * int(u)
+    } else if (clone.datum === EquationTree.operations.multiply
+      && clone.left && clone.right
+      && typeof(clone.right.datum) === 'number'
+    ) {
+      const left = clone.left.clone();
+      const right = clone.right.clone();
+      clone.left = right;
+      clone.right = left;
+
+      clone.right = clone.right.integrate();
+
+
+    }
+
+    clone.simplify();
+
+    return clone;
+  }
 }
 
 export default EquationTree;
