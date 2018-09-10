@@ -460,7 +460,9 @@ class EquationTree {
       clone.right = new EquationTree(EquationTree.variables.x);
 
     // int(x) => x^2 / 2
-    } else if (clone.isLeaf() && EquationTree.isVariable(clone.datum)) {
+    } else if (clone.isLeaf() && typeof(clone.datum) === 'string'
+      && EquationTree.isVariable(clone.datum)
+    ) {
       clone.datum = EquationTree.operations.divide;
       clone.left = new EquationTree(
         EquationTree.operations.exponential,
