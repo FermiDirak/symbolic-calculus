@@ -32,7 +32,7 @@ The project is built in Typescript and transpiles down to ES2016, and is therefo
 
 ### Contributing
 
-We are currently looking for contributors. If you want to help out, check out https://github.com/fermidirak/symbolic-calculus and look for any tags labeled `help wanted`. This is a great way to get started with open source.
+We are currently looking for contributors. If you want to help out, check-out https://github.com/fermidirak/symbolic-calculus and look for any tags labeled `help wanted`. This is a great way to get started with open source.
 
 ##### To begin contributing:
 
