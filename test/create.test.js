@@ -14,7 +14,7 @@ describe('Create Equation using standard notation', () => {
   // expect(equationTree2).toBe(null);
 
   test('should create a basic equation', () => {
-    SymbolicCalculus.createEquationStandard('532x + 3');
+    SymbolicCalculus.createEquationStandard('(5x+3) + (6x + 4)');
 
     expect(1 + 1).toBe(2);
 

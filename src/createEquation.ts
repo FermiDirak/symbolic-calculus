@@ -36,7 +36,6 @@ function createEquation(equationString: string): EquationTree {
 
   console.log(equationArray);
 
-  console.log('hi')
 
   return new EquationTree(5);
 
