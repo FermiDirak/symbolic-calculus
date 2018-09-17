@@ -1,4 +1,4 @@
-import createEquation from './createEquation';
+import createEquationPolish from './createEquationPolish';
 
 /** A tree that represents a mathematical expression */
 class EquationTree {
@@ -137,7 +137,7 @@ class EquationTree {
   clone(): EquationTree {
     const equationString = this.toString();
 
-    return createEquation(equationString);
+    return createEquationPolish(equationString);
   }
 
   /** simplifies the equation tree */
